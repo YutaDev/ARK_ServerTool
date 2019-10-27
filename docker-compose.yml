@@ -1,10 +1,8 @@
 version: '3'
-
 services:
   mysql:
     build: ./mysql
-    container_name: ARK_Bleeing
-    image: mysql:5.7
+    image: mysql5.7
     ports:
       - "3306:3306"
     environment:
@@ -28,9 +26,22 @@ services:
       - ./golang/api:/go/src/api
     #command: sh ./scripts/start_app.sh
   vue:
+    ##build: ./client
+    ##ports:
+    ##  - 8888:8080
+    ##volumes:
+    ##  - ./client:/app
+    ##  - /app/node_modules
+    container_name: vue_js
     build: ./client
     ports:
-      - 8888:8080
+      - 8080:8080
+    privileged: true
+    volumes:
+      - ./server:/app
+    tty: true
+    stdin_open: true
+    command: /bin/sh
     volumes:
       - ./client:/app
       - /app/node_modules

@@ -1,5 +1,10 @@
-FROM node:10.12-alpine as build-stage
+FROM node:9.7.0-alpine
+
 WORKDIR /app
-COPY . .
-RUN yarn install
-CMD yarn serve
+
+COPY package.json /app
+
+RUN apk update && \
+    npm install && \
+    npm install -g npm && \
+    npm install -g vue-cli
