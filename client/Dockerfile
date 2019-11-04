@@ -1,10 +1,6 @@
-FROM node:9.7.0-alpine
+FROM node:12.12.0-alpine
 
 WORKDIR /app
 
-COPY package.json /app
-
 RUN apk update && \
-    npm install && \
-    npm install -g npm && \
-    npm install -g vue-cli
+    npm install -g npm @vue/cli

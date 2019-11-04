@@ -26,26 +26,14 @@ services:
       - ./golang/api:/go/src/api
     #command: sh ./scripts/start_app.sh
   vue:
-    ##build: ./client
-    ##ports:
-    ##  - 8888:8080
-    ##volumes:
-    ##  - ./client:/app
-    ##  - /app/node_modules
-    container_name: vue_js
     build: ./client
     ports:
-      - 8080:8080
-    privileged: true
-    volumes:
-      - ./server:/app
-    tty: true
-    stdin_open: true
-    command: /bin/sh
+      - 9050:9050
     volumes:
       - ./client:/app
-      - /app/node_modules
-
+    stdin_open: true
+    tty: true
+    command: /bin/sh
 volumes:
   db-data:
     driver: local
@@ -54,3 +42,5 @@ volumes:
 #https://qiita.com/thimi0412/items/61a27364a09d60a86708
 #https://qiita.com/kkeisuke/items/7cd4d5834386666faab3
 #また docker exec -it コンテナ名では　alpine linux　では /bin/ash
+
+#docker exec -it vue_js /bin/ash で実行
